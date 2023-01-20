@@ -9,8 +9,8 @@ namespace platformer
     {
         Idle,
         Walk,
-        Jump
-        //add new tracks here
+        Jump,
+        CoinRotation
     }
     [CreateAssetMenu(fileName = "SpriteAnimationsConfig", menuName = "Configs/SpriteAnimationsConfig", order = 1)]
     public class SpriteAnimationsConfig : ScriptableObject
