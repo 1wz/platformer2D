@@ -61,13 +61,13 @@
     <Compile Include="Assets\Scripts\Main.cs" />
     <Compile Include="Assets\Scripts\InfiniteHorizontalBackground.cs" />
     <Compile Include="Assets\Scripts\Controllers\SpriteAnimator.cs" />
+    <Compile Include="Assets\Scripts\Controllers\CoinsManager.cs" />
+    <Compile Include="Assets\Scripts\Controllers\ContactsPoller.cs" />
+    <Compile Include="Assets\Scripts\Controllers\LevelCompleteManager.cs" />
     <Compile Include="Assets\Scripts\Configs\BackGroundConfig.cs" />
     <Compile Include="Assets\Scripts\Deque.cs" />
-    <Compile Include="Assets\Scripts\Controllers\ParalaxManager.cs" />
     <Compile Include="Assets\Scripts\Controllers\MainHeroPhysicsWalker.cs" />
-    <Compile Include="Assets\Scripts\Controllers\ContactsPoller.cs" />
-    <Compile Include="Assets\Scripts\Controllers\CoinsManager.cs" />
-    <Compile Include="Assets\Scripts\Controllers\LevelCompleteManager.cs" />
+    <Compile Include="Assets\Scripts\Controllers\ParalaxManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\BayatGames\Free Platform Game Assets\Readme.txt" />

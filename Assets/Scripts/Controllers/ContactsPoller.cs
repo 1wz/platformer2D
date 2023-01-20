@@ -13,6 +13,7 @@ namespace platformer
         public bool IsGrounded { get; private set; }
         public bool HasLeftContacts { get; private set; }
         public bool HasRightContacts { get; private set; }
+        public Vector2 GroundVelocity;
         public ContactsPoller(Collider2D collider2D)
         {
             _collider2D = collider2D;
@@ -27,10 +28,14 @@ namespace platformer
             {
                 var normal = _contacts[i].normal;
                 var rigidBody = _contacts[i].rigidbody;
-                if (normal.y > _collisionThresh) IsGrounded = true;
-                if (normal.x > _collisionThresh && rigidBody == null)
+                if (normal.y > _collisionThresh)
+                {
+                    IsGrounded = true;
+                    GroundVelocity = rigidBody == null?Vector2.zero:rigidBody.velocity;
+                }
+                    if (normal.x > _collisionThresh && (rigidBody == null||(rigidBody!=null&&!IsGrounded)))
                     HasLeftContacts = true;
-                if (normal.x < -_collisionThresh && rigidBody == null)
+                if (normal.x < -_collisionThresh && (rigidBody == null || (rigidBody != null && !IsGrounded)))
                     HasRightContacts = true;
             }
         }
