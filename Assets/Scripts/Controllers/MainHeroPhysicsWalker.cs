@@ -9,7 +9,7 @@ namespace platformer
         private const string _verticalAxisName = "Vertical";
         private const string _horizontalAxisName = "Horizontal";
         private const float _animationsSpeed = 10;
-        private const float _walkSpeed = 150;
+        private const float _walkSpeed = 3;
         private const float _jumpForse = 350;
         private const float _jumpThresh = 0.1f;
         private const float _flyThresh = 1f;
@@ -34,16 +34,19 @@ namespace platformer
             var walks = Mathf.Abs(_goSideWay) > _movingThresh;
             if (walks) _view.SpriteRenderer.flipX = _goSideWay < 0;
             var newVelocity = 0f;
-            if (walks &&
+            
+            if (walks/* &&
             (_goSideWay > 0 || !_contactsPoller.HasLeftContacts) &&
-            (_goSideWay < 0 || !_contactsPoller.HasRightContacts))
+            (_goSideWay < 0 || !_contactsPoller.HasRightContacts)*/)
             {
-                newVelocity = Time.fixedDeltaTime * _walkSpeed *
-                (_goSideWay < 0 ? -1 : 1);
+                newVelocity = _walkSpeed *(_goSideWay < 0 ? -1 : 1);
             }
-            _view.Rigidbody2D.velocity = new Vector2(newVelocity, _view.Rigidbody2D.velocity.y);
-            if (_contactsPoller.IsGrounded && _doJump &&
-            Mathf.Abs(_view.Rigidbody2D.velocity.y) <= _jumpThresh)
+            newVelocity += _contactsPoller.GroundVelocity.x;
+            float forceX=(newVelocity - _view.Rigidbody2D.velocity.x) * _view.Rigidbody2D.mass / Time.fixedDeltaTime;
+            _view.Rigidbody2D.AddForce(new Vector2(forceX, 0));
+            //_view.Rigidbody2D.velocity = new Vector2(newVelocity, _view.Rigidbody2D.velocity.y);
+            if (_contactsPoller.IsGrounded && _doJump &&Mathf.Abs(_view.Rigidbody2D.velocity.y -
+_contactsPoller.GroundVelocity.y) <= _jumpThresh)
             {
                 _view.Rigidbody2D.AddForce(Vector3.up * _jumpForse);
             }

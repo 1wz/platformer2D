@@ -33,6 +33,7 @@ namespace platformer
         void Update()
         {
             _playerAnimator?.Update();
+
         }
         private void FixedUpdate()
         {
